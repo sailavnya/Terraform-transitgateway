@@ -1,0 +1,28 @@
+#for flowlogs that need to attach in IAM in json format
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"iam:CreateRole",
+				"iam:AttachRolePolicy",
+				"iam:PutRolePolicy"
+			],
+			"Resource": "arn:aws:iam::418272757444:role/role_lab_flow_logs"
+		}
+	]
+}
+
+# cloudwatch json policy
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "logs:CreateLogGroup",
+			"Resource": "arn:aws:logs:us-east-1:418272757444:log-group:Transit_Gateway_Log_Group"
+		}
+	]
+}
