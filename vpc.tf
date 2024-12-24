@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "VPC_A_IGW" {
 resource "aws_subnet" "public_subnet_1_for_VPC_A_AZ_2A" {
   vpc_id                  = aws_vpc.VPC_A.id
   cidr_block              = "192.168.1.0/24"
-  availability_zone       = "us-east-2a"
+  availability_zone       = "us-east-1a"
   map_public_ip_on_launch = "true"
 
   tags = {
@@ -45,7 +45,7 @@ resource "aws_subnet" "public_subnet_1_for_VPC_A_AZ_2A" {
 resource "aws_subnet" "public_subnet_2_for_VPC_A_AZ_2B" {
   vpc_id            = aws_vpc.VPC_A.id
   cidr_block        = "192.168.2.0/24"
-  availability_zone = "us-east-2b"
+  availability_zone = "us-east-1b"
   tags = {
     Name = "public_subnet_2_for_VPC_A_AZ_2B"
   }
@@ -101,10 +101,10 @@ cidr_blocks = ["0.0.0.0/0"]
 }
 }
 resource "aws_instance" "Bastion" {
-  ami               = "ami-0b029b1931b347543"
+  ami               = "ami-005fc0f236362e99f"
   instance_type     = "t2.micro"
   tenancy           = "default"
-  availability_zone = "us-east-2a"
+  availability_zone = "us-east-1a"
   key_name          = ""
   subnet_id         = aws_subnet.public_subnet_1_for_VPC_A_AZ_2A.id
   security_groups   = ["${aws_default_security_group.SG_bastion.id}"]
@@ -157,7 +157,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "TGA_VPC_A" {
 resource "aws_subnet" "public_subnet_1_for_VPC_B_AZ_2A" {
   vpc_id            = aws_vpc.VPC_B.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-east-2a"
+  availability_zone = "us-east-1a"
   tags = {
     Name = "public_subnet_1_for_VPC_B_AZ_2A"
   }
@@ -166,7 +166,7 @@ resource "aws_subnet" "public_subnet_1_for_VPC_B_AZ_2A" {
 resource "aws_subnet" "public_subnet_2_for_VPC_B_AZ_2B" {
   vpc_id            = aws_vpc.VPC_B.id
   cidr_block        = "10.0.3.0/24"
-  availability_zone = "us-east-2b"
+  availability_zone = "us-east-1b"
   tags = {
     Name = "public_subnet_2_for_VPC_B_AZ_2B"
   }
@@ -239,10 +239,10 @@ cidr_blocks = ["0.0.0.0/0"]
 }
 }
 resource "aws_instance" "DB_1" {
-  ami               = "ami-0b029b1931b347543"
+  ami               = "ami-005fc0f236362e99f"
   instance_type     = "t2.micro"
   tenancy           = "default"
-  availability_zone = "us-east-2a"
+  availability_zone = "us-east-1a"
   key_name          = ""
   subnet_id         = aws_subnet.public_subnet_1_for_VPC_B_AZ_2A.id
   security_groups   = ["${aws_default_security_group.DB_1.id}"]
@@ -265,7 +265,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "TGA_VPC_B" {
 resource "aws_subnet" "public_subnet_1_for_VPC_C_AZ_2A" {
   vpc_id            = aws_vpc.VPC_C.id
   cidr_block        = "10.1.2.0/24"
-  availability_zone = "us-east-2a"
+  availability_zone = "us-east-1a"
   tags = {
     Name = "public_subnet_1_for_VPC_C_AZ_2A"
   }
@@ -274,7 +274,7 @@ resource "aws_subnet" "public_subnet_1_for_VPC_C_AZ_2A" {
 resource "aws_subnet" "public_subnet_2_for_VPC_C_AZ_2B" {
   vpc_id            = aws_vpc.VPC_C.id
   cidr_block        = "10.1.3.0/24"
-  availability_zone = "us-east-2b"
+  availability_zone = "us-east-1b"
   tags = {
     Name = "public_subnet_2_for_VPC_C_AZ_2B"
   }
@@ -346,10 +346,10 @@ cidr_blocks = ["0.0.0.0/0"]
 }
 }
 resource "aws_instance" "DB_2" {
-  ami               = "ami-0b029b1931b347543"
+  ami               = "ami-005fc0f236362e99f"
   instance_type     = "t2.micro"
   tenancy           = "default"
-  availability_zone = "us-east-2a"
+  availability_zone = "us-east-1a"
   key_name          = ""
   subnet_id         = aws_subnet.public_subnet_1_for_VPC_C_AZ_2A.id
   security_groups   = ["${aws_default_security_group.DB_2.id}"]
@@ -414,3 +414,5 @@ resource "aws_ec2_transit_gateway_route_table_association" "TGW_RTB_VPC_A_Associ
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.TGA_VPC_A.id
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.TGW_RTB_VPC_A.id
 }
+
+# need to change the AMi id 
